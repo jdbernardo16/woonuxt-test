@@ -43,8 +43,13 @@ jobs:
                   git config --global user.name "jdbernardo16"
                   git config --global user.email "jdbernardo16@gmail.com"
 
-            - name: Deploy to GitHub Pages
+            - name: Configure Git and Deploy
               env:
                   GH_TOKEN: ${{ secrets.SECRET_TOKEN }}
               run: |
-                  npm run deploy
+                  # Configure Git
+                  git config --global user.name "jdbernardo16"
+                  git config --global user.email "jdbernardo16@gmail.com"
+
+                  # Deploy with authenticated URL
+                  npx gh-pages -d dist -r "https://${SECRET_TOKEN}@github.com/jdbernardo16/woonuxt-test.git"
