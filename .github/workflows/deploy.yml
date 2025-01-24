@@ -10,6 +10,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v3
+              with:
+                  persist-credentials: false # Important for proper token usage
 
             - name: Setup Node.js
               uses: actions/setup-node@v3
@@ -42,4 +44,7 @@ jobs:
                   git config --global user.email "jdbernardo16@gmail.com"
 
             - name: Deploy to GitHub Pages
-              run: npm run deploy
+              env:
+                  GH_TOKEN: ${{ secrets.SECRET_TOKEN }}
+              run: |
+                  npm run deploy
