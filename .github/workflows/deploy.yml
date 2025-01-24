@@ -43,5 +43,8 @@ jobs:
                   git config --global user.name "jdbernardo16"
                   git config --global user.password "${{ secrets.SECRET_TOKEN }}"
 
+            - name: Setup credentials to access private repositories
+                run: git config --global url.https://${{ secrets.SECRET_TOKEN }}@github.com/.insteadOf https://github.com/
+
             - name: Deploy to GitHub Pages
               run: npm run deploy
