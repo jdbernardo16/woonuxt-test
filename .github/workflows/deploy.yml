@@ -14,13 +14,27 @@ jobs:
             - name: Setup Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: 18
+                  node-version: 23.4
+
+            - name: Create .env file
+              run: |
+                  echo "GQL_HOST=${{ secrets.GQL_HOST }}" >> .env
+                  echo "NUXT_PUBLIC_PRODUCTS_PER_PAGE=${{ secrets.NUXT_PUBLIC_PRODUCTS_PER_PAGE }}" >> .env
+                  echo "NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}" >> .env
+                  echo "PRIMARY_COLOR=${{ secrets.PRIMARY_COLOR }}" >> .env
+                  echo "NUXT_IMAGE_DOMAINS=${{ secrets.NUXT_IMAGE_DOMAINS }}" >> .env
 
             - name: Install dependencies
               run: npm ci
 
             - name: Build project
               run: npm run build
+              env:
+                  GQL_HOST: ${{ secrets.GQL_HOST }}
+                  NUXT_PUBLIC_PRODUCTS_PER_PAGE: ${{ secrets.NUXT_PUBLIC_PRODUCTS_PER_PAGE }}
+                  NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+                  PRIMARY_COLOR: ${{ secrets.PRIMARY_COLOR }}
+                  NUXT_IMAGE_DOMAINS: ${{ secrets.NUXT_IMAGE_DOMAINS }}
 
             - name: Deploy to GitHub Pages
               run: npm run deploy
