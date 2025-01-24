@@ -36,5 +36,10 @@ jobs:
                   PRIMARY_COLOR: ${{ secrets.PRIMARY_COLOR }}
                   NUXT_IMAGE_DOMAINS: ${{ secrets.NUXT_IMAGE_DOMAINS }}
 
+            - name: Configure Git
+              run: |
+                  git config --global user.name "jdbernardo16"
+                  git config --global user.email "jdbernardo16@gmail.com"
+
             - name: Deploy to GitHub Pages
               run: npm run deploy
