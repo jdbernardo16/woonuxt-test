@@ -28,7 +28,7 @@ jobs:
               run: npm ci
 
             - name: Build project
-              run: npm run build
+              run: npm run generate
               env:
                   GQL_HOST: ${{ secrets.GQL_HOST }}
                   NUXT_PUBLIC_PRODUCTS_PER_PAGE: ${{ secrets.NUXT_PUBLIC_PRODUCTS_PER_PAGE }}
