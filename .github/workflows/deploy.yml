@@ -41,7 +41,8 @@ jobs:
             - name: Configure Git
               run: |
                   git config --global user.name "jdbernardo16"
-                  git config --global user.password "${{ secrets.SECRET_TOKEN }}"
+                  git config --global user.email "jdbernardo16@gmail.com"
+                  git config --global url.https://${{ secrets.SECRET_TOKEN }}@github.com/.insteadOf https://github.com/
 
             - name: Deploy to GitHub Pages
               run: npm run deploy
